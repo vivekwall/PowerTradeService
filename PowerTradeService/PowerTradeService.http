@@ -1,0 +1,6 @@
+@PowerTradeService_HostAddress = http://localhost:5118
+
+GET {{PowerTradeService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
