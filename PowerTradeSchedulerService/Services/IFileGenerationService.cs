@@ -1,13 +1,10 @@
-﻿
+﻿using PowerTradeSchedulerService.Model;
 
-using PowerTradeSchedulerService.Model;
+namespace PowerTradeSchedulerService;
 
-namespace PowerTradeSchedulerService
+public interface IFileGenerationService
 {
-    public interface IFileGenerationService
-    {
-        string GenerateCsvContent(List<PowerServiceResult> volumeResults);
-        string GenerateCsvFileName(DateTime localNow);
-        bool SaveCsvFile(string content, string fileName, string fileLocation);
-    }
+    string GenerateCsvContent(List<PowerServiceResult> volumeResults);
+    string GenerateCsvFileName(DateTime localNow);
+    bool SaveCsvFile(string content, string fileName, string fileLocation);
 }

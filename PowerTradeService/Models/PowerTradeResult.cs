@@ -1,9 +1,8 @@
-﻿namespace PowerTradeService.Models
+﻿namespace PowerTradeService.Models;
+
+public class PowerTradeResult
 {
-    public class PowerTradeResult
-    {
-        public DateTime Date { get; set; }
-        public int Hour { get; set; }   
-        public double TotalVolume { get; set; }
-    }
+    public DateTime Date { get; set; }
+    public int Hour { get; set; }   
+    public double TotalVolume { get; set; }
 }

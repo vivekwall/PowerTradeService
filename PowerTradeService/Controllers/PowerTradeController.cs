@@ -1,32 +1,32 @@
 using Microsoft.AspNetCore.Mvc;
-using PowerTradeService.Models;
+using PowerTradeService.ExternalServiceWrapper;
 using PowerTradeService.Services;
-using Services;
-using static Services.PowerService;
 
-namespace PowerTradeService.Controllers
+namespace PowerTradeService.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class PowerTradeController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class PowerTradeController : ControllerBase
+    private readonly IPowerServiceWrapper _powerServiceWrapper;
+    private readonly ILogger<PowerTradeController> _logger;
+ 
+    public PowerTradeController(IPowerServiceWrapper powerServiceWrapper, ILogger<PowerTradeController> logger)
     {
-        private readonly ILogger<PowerTradeBusinessService> _powerTradeBusinessServiceLogger;
-        private readonly ILogger<PowerTradeController> _powerTradeControllerLogger;
+        _powerServiceWrapper = powerServiceWrapper;
+        _logger = logger;
+    }
 
-        public PowerTradeController(ILogger<PowerTradeController> logger)
-        {
-            _powerTradeControllerLogger = logger;
-        }
+    [HttpGet(Name = "GetTrades")]
+    public async Task<IActionResult> Get()
+    {
+        _logger.LogInformation("Calling PowerService");
+     
+        var trades = await new PowerTradeBusinessService(_powerServiceWrapper).GetTradesForPeriodAsync();
 
-        [HttpGet(Name = "GetTrades")]
-        public async Task<IActionResult> Get()
-        {
-            var trades = await new PowerTradeBusinessService().GetTradesForPeriodAsync();
+        var currentDate = DateTime.UtcNow.Date.ToString("MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
 
-            var currentDate = DateTime.UtcNow.Date.ToString("MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-
-            return Ok(trades);
-          
-        }
+        return Ok(trades);
+      
     }
 }

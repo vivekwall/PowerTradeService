@@ -1,9 +1,8 @@
 ﻿using PowerTradeService.Models;
 
-namespace PowerTradeService.Services
+namespace PowerTradeService.Services;
+
+public interface IPowerTradeBusinessService
 {
-    public interface IPowerTradeBusinessService
-    {
-        public Task<List<PowerTradeResult>> GetTradesForPeriodAsync();
-    }
+    public Task<List<PowerTradeResult>> GetTradesForPeriodAsync();
 }

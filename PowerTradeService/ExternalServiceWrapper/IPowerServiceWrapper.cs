@@ -1,10 +1,8 @@
 ﻿using PowerTradeService.Models;
-using Services;
 
-namespace PowerTradeService.ExternalServiceWrapper
+namespace PowerTradeService.ExternalServiceWrapper;
+
+public interface IPowerServiceWrapper
 {
-    public interface IPowerServiceWrapper
-    {
-        Task<IEnumerable<PowerTradeModel>> GetTradesAsync(DateTime date);
-    }
+    Task<IEnumerable<PowerTradeModel>> GetTradesAsync(DateTime date);
 }
