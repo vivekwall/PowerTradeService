@@ -24,8 +24,6 @@ public class PowerTradeController : ControllerBase
      
         var trades = await new PowerTradeBusinessService(_powerServiceWrapper).GetTradesForPeriodAsync();
 
-        var currentDate = DateTime.UtcNow.Date.ToString("MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-
         return Ok(trades);
       
     }

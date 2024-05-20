@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using PowerTradeSchedulerService.Model;
 using System.Net.Http.Json;
 
@@ -22,6 +23,7 @@ public class Worker : BackgroundService
         _config = configuration;
         _httpClient = new HttpClient();
         
+        //TODO: Refactor using Configuration Options. 
         _intervalMinutes = int.Parse(_config["ExecutionInterval"]);
         _filePath = _config["FilePath"];
         _apiUrl = _config["PowerTradeServiceUrl"];
@@ -53,6 +55,7 @@ public class Worker : BackgroundService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error occurred while calling the CSV extraction API.");
+            _logger.LogError (ex.StackTrace);
         }
 
     }
